@@ -1,0 +1,237 @@
+#!/usr/local/bin/perl -w
+
+#Last updated: Apr 13, 2007 by Jun Zhuang
+# Apr 12,13,2007 extra column for stddev, remove begining content, results only
+#
+#Version 0.2 Hui Quan Jan 17,2007
+
+use CGI qw(:standard);
+use CGI::Carp qw( fatalsToBrowser );
+use DBI;
+use HTML::Template;
+
+
+my $underscore_plus=241;
+my $UNDETECTABLE_VALUE=45;
+
+###### Connect to database 
+
+my $server_name = $ENV{"SERVER_NAME"};
+my $dbh;
+
+#
+my $INTERNAL_SERVER = ($server_name eq "www-devel.tigr.org") ? 1 : 0;
+
+# inside
+#JZ1
+if ($INTERNAL_SERVER) {
+   $dbh = DBI->connect("dbi:mysql:town_at_qpcr:mysql","access","access") or die "Cannot connect to database";
+}
+else {
+    $dbh = DBI->connect("dbi:mysql:town_at_qpcr:mysql51-dmz-pro","access","access") or die "Cannot connect to database";
+}
+
+
+
+
+my $tissue1 = uc param("tissue1");
+my $relation= param("relation");
+my $tissue2 = uc param("tissue2");
+my $fold_change=param("change");
+
+#my $tissue1="LEAF";
+#my $tissue2="ROOT";
+#my $relation=">";
+#my $fold_change=1.5;
+
+#JZ1 
+# Make sure that the "fold_change" form item has a reasonable value
+$fold_change =~s/\b//g;
+#if(($fold_change =~/\D/ && $fold_change !~/\d+\./) || $fold_change eq "")
+if($fold_change =~/^\d+$/)
+{
+;
+}
+elsif($fold_change =~/^\d*\.\d+$/)
+{
+;
+}
+elsif($fold_change =~/^\d+\.\d*$/)
+{
+;
+}
+elsif($fold_change =~/\D/ || $fold_change eq "")
+{
+    print header;
+    print "Input \'fold change\'=[$fold_change] is not a decimal number (or empty)! 
+    <br>Please go back and check your input again.\n";
+    exit;
+}
+
+#my %incoming=&read_input;
+#my $q = new CGI;
+
+#my $gene_name = uc $incoming{'gene'};
+
+$list_query = qq{SELECT DISTINCT (treatment_name)FROM treatment;};
+my $sth1=$dbh->prepare($list_query);
+
+$sth1->execute();
+while(my @list_result=$sth1->fetchrow_array())
+{
+   push (@drop_list, @list_result);
+}
+
+foreach my $listitem(@drop_list)
+{
+   my $show_value;
+   if(length($listitem)>2)
+   {
+      $show_value=substr($listitem,0,3);
+   }
+   else{ $show_value=$listitem;}
+   my %list_hash = (
+#   elem_error=>$query,
+     elem_optionid => $show_value, 
+     elem_listname => $listitem, 
+     );
+   push(@list_presentation, \%list_hash);
+}
+
+$LIMIT=100;
+
+
+my ($bigger, $smaller);
+
+if($relation eq "<")
+{
+   $bigger=$tissue2; $smaller=$tissue1;
+}
+else{$bigger=$tissue1; $smaller=$tissue2;}
+
+
+
+#######################################
+### search for genes, query database
+
+   my $query;
+
+#
+   $query=qq{SELECT * FROM results WHERE tissue_treatment_group_id LIKE '$bigger%' AND target_id NOT IN ('lysA','pheB','thrC','trpF','dapB') ORDER BY avg_conc DESC};
+
+#print "query is $query\n";
+
+   my $sth=$dbh->prepare($query);
+
+   $sth->execute();
+   my @big_results;
+
+$counter=0;
+   while ((my @result = $sth->fetchrow_array()) && ($counter<$LIMIT))
+   {
+      my $candidate_gene=$result[0];
+      my $bigger_value=$result[6];
+      my $bigger_value_stddev=$result[7];
+
+#print "candidate gene: $candidate_gene \t bigger gene value ",$bigger_value,"\n";
+
+      if(!$bigger_value){last;}
+      my $new_query=qq{SELECT avg_cycle_time,avg_conc, stddev_conc FROM results WHERE tissue_treatment_group_id LIKE '$smaller%' AND target_id='$candidate_gene'};
+
+      my $sth=$dbh->prepare($new_query);
+      $sth->execute();
+      my ($small_cycle,$small_value, $small_stddev)=$sth->fetchrow_array();
+
+#print "\n small cycle: $small_cycle small value: $small_value\n";
+      if(!$small_value)
+      {
+         if($small_cycle == $UNDETECTABLE_VALUE)
+         {
+
+#print "small is undetectable\n";
+            push(@big_results, join("\t",($candidate_gene,$bigger_value,$bigger_value_stddev,"","")));
+            $counter++;
+         }
+         next;
+
+      }  #if the value in smaller is 0 but not NULL, it's a good candidate.
+
+
+#print "small val: ", $small_value,"\n";            
+      if($bigger_value > ($fold_change*$small_value)){
+
+#print "FIT\n";
+            push(@big_results, join("\t",($candidate_gene,$bigger_value,$bigger_value_stddev,$small_value, $small_stddev)));
+            $counter++;
+
+      }
+
+   }  # end while
+
+### Get the full name of treatment.
+$query_1 =qq{SELECT DISTINCT (treatment_name)FROM treatment WHERE treatment_name LIKE '$bigger%';};
+my $sth_1=$dbh->prepare($query_1);
+$sth_1->execute();
+my ($bigger_name)=$sth_1->fetchrow_array();
+
+$query_2 =qq{SELECT DISTINCT (treatment_name)FROM treatment WHERE treatment_name LIKE '$smaller%';};
+my $sth_2=$dbh->prepare($query_2);
+$sth_2->execute();
+my ($smaller_name)=$sth_2->fetchrow_array();
+
+# render sorted taxon stats table into format for template
+foreach $row(@big_results)
+{
+   my @field=split(/\t/,$row);
+   for(my $i=1;$i<5;$i+=2)
+   {
+      if($field[$i]=~m#0\.0*\d\d\d*# ){
+         $field[$i]=~s/(0\.0*\d\d)\d*/$1/;
+      }
+      else{
+         $field[$i]=~s/([1-9]+\.\d\d)\d*/$1/;
+      }
+      if($field[$i+1]=~m#0\.0*\d\d\d*# ){
+            $field[$i+1]=~s/(0\.0*\d\d)\d*/$1/;
+      }
+      else{
+        $field[$i+1]=~s/([1-9]+\.\d\d)\d*/$1/;
+      }
+      #$field[$i+1]=qq{ &nbsp <u>+</u> &nbsp }.$field[$i+1];}   
+      $field[$i+1]=$field[$i+1];
+   }   
+
+   if(!($field[3])){
+      $field[3]="Undetectable"; $field[4]="";
+   }
+      
+   my %row_hash = (
+#   elem_error=>$query,
+   elem_target_id => $field[0], 
+   elem_tissue1 => $bigger_name, 
+   #JZ2 elem_tissue1_value=> $field[1].$field[2],
+   elem_tissue1_value=> $field[1],
+   elem_tissue1_value2=> $field[2],
+   elem_tissue2 => $smaller_name, 
+   #JZ2 elem_tissue2_value=> $field[3].$field[4]
+   elem_tissue2_value=> $field[3],
+   elem_tissue2_value2=> $field[4]
+
+
+   );
+
+   push(@result_presentation, \%row_hash);
+}
+
+print header;
+#print "Test2\n";
+
+$tmpl = HTML::Template->new(filename => "search_return2.tmpl");
+$tmpl->param(compare_table=>\@result_presentation);
+#JZ2 $tmpl->param(list1=>\@list_presentation);
+#JZ2 $tmpl->param(list2=>\@list_presentation);
+# JZ2 $tmpl->param(list3=>\@list_presentation);
+
+#print "Gene name: $gene_name\n   Tissue group: ", join(",",@tissue_name);
+print $tmpl->output;
+

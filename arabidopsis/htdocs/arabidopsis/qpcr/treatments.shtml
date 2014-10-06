@@ -1,0 +1,235 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <title>TIGR Arabidopsis thaliana Gene Expression</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <link href="/arabidopsis/qpcr/qpcr.css" rel="stylesheet" type="text/css">
+    <style type="text/css">
+    </style>
+    <script src="/arabidopsis/qpcr/js/ajax.js"></script>
+</head>
+
+<body style="margin-left":50%;">
+<div id="container" style="position:relative; width: 760px; ">
+
+
+	<div id="logo" align="center" style="position:absolute; width: 760px; top: 5px; left: 50px;"><img src="/arabidopsis/qpcr/imgs/treatments.jpg" width="760" height="182"></div> 
+
+     	<div id="navsite" align="center" style="position:absolute; width: 760px; top: 210px; left: 65px;"> 
+
+  	<ul> 
+    		<li><a href="/arabidopsis/qpcr/index.shtml">Home</a></li> 
+    		<li><a href="/arabidopsis/qpcr/search.php">Gene Expression</a></li> 
+    		<li><a href="/arabidopsis/qpcr/genelist.php">Gene List</a></li> 
+		<li><a href="/arabidopsis/qpcr/protocols.php">Protocols</a></li>
+		<li><a href="/arabidopsis/qpcr/expression.php">Reporter Images</a></li>
+    		<li><a href="/arabidopsis/qpcr/contact.shtml">Contact</a></li>
+    		<li><a href="http://www.tigr.org">TIGR Home</a></li> 
+  	</ul> 
+     	</div> 
+
+    	<div id="main_content"  style="position:absolute; width: 760px; top: 250px; left: 50px;"> 
+ 	 <h4 align="center" size="12">Plant Treatments</h4> 
+
+<TABLE FRAME=BOX CELLSPACING=0 COLS=9 RULES=GROUPS BORDER=1>
+	<COLGROUP><COL WIDTH=86></COLGROUP>
+	<COLGROUP><COL WIDTH=114></COLGROUP>
+	<COLGROUP><COL WIDTH=180></COLGROUP>
+	<COLGROUP><COL WIDTH=71></COLGROUP>
+	<COLGROUP><COL WIDTH=122></COLGROUP>
+	<COLGROUP><COL WIDTH=177></COLGROUP>
+	<COLGROUP><COL WIDTH=230></COLGROUP>
+	<COLGROUP><COL WIDTH=144></COLGROUP>
+	<COLGROUP><COL WIDTH=244></COLGROUP>
+	<TBODY>
+		<TR>
+			<TD WIDTH=86 HEIGHT=26 ALIGN=LEFT><BR></TD>
+			<TD WIDTH=114 ALIGN=LEFT><BR></TD>
+			<TD WIDTH=180 ALIGN=LEFT><BR></TD>
+			<TD COLSPAN=6 WIDTH=989 ALIGN=CENTER><B>Growth Conditions</B></TD>
+			</TR>
+	</TBODY>
+	<TBODY>
+		<TR>
+			<TD HEIGHT=61 ALIGN=LEFT><B>Treatment ID</B></TD>
+			<TD ALIGN=LEFT><B>Tissue Type</B></TD>
+			<TD ALIGN=LEFT><B>Treatment</B></TD>
+			<TD ALIGN=CENTER><B>Day Length</B></TD>
+			<TD ALIGN=CENTER><B>Days &quot;Out of Cold&quot;</B></TD>
+			<TD ALIGN=LEFT><B>Media <a href="Media.pdf">(see also Media.pdf)</a></B></TD>
+			<TD ALIGN=LEFT><B>Unit</B></TD>
+			<TD ALIGN=CENTER><B>Plants per Unit</B></TD>
+			<TD ALIGN=LEFT>Additional information</TD>
+		</TR>
+	</TBODY>
+	<TBODY>
+		<TR>
+			<TD HEIGHT=61 ALIGN=LEFT><B>IAA</B></TD>
+			<TD ALIGN=LEFT>whole plant</TD>
+			<TD ALIGN=LEFT>1uM Indole-3-Acetic Acid, 1h</TD>
+			<TD ALIGN=CENTER SDVAL="24" SDNUM="1033;">24</TD>
+			<TD ALIGN=CENTER SDVAL="14" SDNUM="1033;">14</TD>
+			<TD ALIGN=LEFT>MSO/2</TD>
+			<TD ALIGN=LEFT>500mL flask, 200mL media</TD>
+			<TD ALIGN=CENTER SDVAL="80" SDNUM="1033;">80</TD>
+			<TD ALIGN=LEFT>Grown at approximately 100rpm; For treatment add IAA to flask, final 1uM, harvest at 1h</TD>
+		</TR>
+	</TBODY>
+	<TBODY>
+		<TR>
+			<TD HEIGHT=61 ALIGN=LEFT><B>LEAF</B></TD>
+			<TD ALIGN=LEFT>basal rosette leaf</TD>
+			<TD ALIGN=LEFT>n/a</TD>
+			<TD ALIGN=CENTER SDVAL="16" SDNUM="1033;">16</TD>
+			<TD ALIGN=CENTER SDVAL="21" SDNUM="1033;">21</TD>
+			<TD ALIGN=LEFT>ProMix BX</TD>
+			<TD ALIGN=LEFT>2 inch square cell</TD>
+			<TD ALIGN=CENTER SDVAL="1" SDNUM="1033;">1</TD>
+			<TD ALIGN=LEFT>Grown in Percival growth chamber; rosette leaves only</TD>
+		</TR>
+	</TBODY>
+	<TBODY>
+		<TR>
+			<TD HEIGHT=61 ALIGN=LEFT><B>ROOT</B></TD>
+			<TD ALIGN=LEFT>root</TD>
+			<TD ALIGN=LEFT>n/a</TD>
+			<TD ALIGN=CENTER SDVAL="24" SDNUM="1033;">24</TD>
+			<TD ALIGN=CENTER SDVAL="21" SDNUM="1033;">21</TD>
+			<TD ALIGN=LEFT>root</TD>
+			<TD ALIGN=LEFT>120mm square plates, 40mL media</TD>
+			<TD ALIGN=CENTER SDVAL="75" SDNUM="1033;">75</TD>
+			<TD ALIGN=LEFT>Plates sealed with vent tape and set vertically</TD>
+		</TR>
+	</TBODY>
+	<TBODY>
+		<TR>
+			<TD HEIGHT=61 ALIGN=LEFT><B>SALT</B></TD>
+			<TD ALIGN=LEFT>whole plant</TD>
+			<TD ALIGN=LEFT>250mM NaCl, 2h</TD>
+			<TD ALIGN=CENTER SDVAL="24" SDNUM="1033;">24</TD>
+			<TD ALIGN=CENTER SDVAL="14" SDNUM="1033;">14</TD>
+			<TD ALIGN=LEFT>MSO/2</TD>
+			<TD ALIGN=LEFT>500mL flask, 200mL media</TD>
+			<TD ALIGN=CENTER SDVAL="80" SDNUM="1033;">80</TD>
+			<TD ALIGN=LEFT>Grown at approximately 100rpm; For treatment add NaCl to flask, final 250mM, harvest at 2h</TD>
+		</TR>
+	</TBODY>
+	<TBODY>
+		<TR>
+			<TD HEIGHT=61 ALIGN=LEFT><B>T87 Cell Culture</B></TD>
+			<TD ALIGN=LEFT>cell line, liquid</TD>
+			<TD ALIGN=LEFT>n/a</TD>
+			<TD ALIGN=CENTER SDVAL="24" SDNUM="1033;">24</TD>
+			<TD ALIGN=CENTER>4*</TD>
+			<TD ALIGN=LEFT>MS*8</TD>
+			<TD ALIGN=LEFT>250mL flask, 50mL media</TD>
+			<TD ALIGN=CENTER>10mL*</TD>
+			<TD ALIGN=LEFT>4day post innoculation with 10mL 50:50 diluted one week old culture, grown at approximately 100rpm</TD>
+		</TR>
+	</TBODY>
+	<TBODY>
+		<TR>
+			<TD HEIGHT=61 ALIGN=LEFT><B>SA</B></TD>
+			<TD ALIGN=LEFT>vegetative rosette</TD>
+			<TD ALIGN=LEFT>1mM Salicylic Acid, 2h</TD>
+			<TD ALIGN=CENTER SDVAL="14" SDNUM="1033;">14</TD>
+			<TD ALIGN=CENTER SDVAL="28" SDNUM="1033;">28</TD>
+			<TD ALIGN=LEFT>ProMix BX</TD>
+			<TD ALIGN=LEFT>4 inch square pot</TD>
+			<TD ALIGN=CENTER SDVAL="10" SDNUM="1033;">10</TD>
+			<TD ALIGN=LEFT>Sprayed with SA as rosettes; roestte diameter = 2 inches, 12-15 mature leaves per plant</TD>
+		</TR>
+	</TBODY>
+	<TBODY>
+		<TR>
+			<TD HEIGHT=61 ALIGN=LEFT><B>Flower Buds</B></TD>
+			<TD ALIGN=LEFT>Inflorescence shoot apex through bud stage 12</TD>
+			<TD ALIGN=LEFT>n/a</TD>
+			<TD ALIGN=CENTER SDVAL="14" SDNUM="1033;">16</TD>
+			<TD ALIGN=CENTER SDVAL="28" SDNUM="1033;">28+</TD>
+			<TD ALIGN=LEFT>ProMix BX</TD>
+			<TD ALIGN=LEFT>24 x 12 inch flat</TD>
+			<TD ALIGN=CENTER SDVAL="10" SDNUM="1033;">100</TD>
+			<TD ALIGN=LEFT>no open or opening flowers</TD>
+		</TR>
+	</TBODY>
+	<TBODY>
+		<TR>
+			<TD HEIGHT=61 ALIGN=LEFT><B>Young Siliques</B></TD>
+			<TD ALIGN=LEFT>Siliques up to stage 6</TD>
+			<TD ALIGN=LEFT>n/a</TD>
+			<TD ALIGN=CENTER SDVAL="14" SDNUM="1033;">16</TD>
+			<TD ALIGN=CENTER SDVAL="28" SDNUM="1033;">28+</TD>
+			<TD ALIGN=LEFT>ProMix BX</TD>
+			<TD ALIGN=LEFT>25 x 12 inch flat</TD>
+			<TD ALIGN=CENTER SDVAL="10" SDNUM="1033;">100</TD>
+			<TD ALIGN=LEFT></TD>
+		</TR>
+	</TBODY>
+	<TBODY>
+		<TR>
+			<TD HEIGHT=16 ALIGN=LEFT><BR></TD>
+			<TD ALIGN=LEFT><BR></TD>
+			<TD ALIGN=LEFT><BR></TD>
+			<TD ALIGN=CENTER><BR></TD>
+			<TD ALIGN=CENTER><BR></TD>
+			<TD ALIGN=LEFT><BR></TD>
+			<TD ALIGN=LEFT><BR></TD>
+			<TD ALIGN=CENTER><BR></TD>
+			<TD ALIGN=LEFT><BR></TD>
+		</TR>
+	</TBODY>
+	<TBODY>
+		<TR>
+			<TD HEIGHT=21 ALIGN=LEFT><BR></TD>
+			<TD ALIGN=LEFT><BR></TD>
+			<TD ALIGN=LEFT><BR></TD>
+			<TD ALIGN=CENTER><BR></TD>
+			<TD ALIGN=CENTER>* Post innoculation</TD>
+			<TD ALIGN=LEFT><BR></TD>
+			<TD ALIGN=LEFT><BR></TD>
+			<TD ALIGN=CENTER>* 50:50 diluted culture</TD>
+			<TD ALIGN=LEFT><BR></TD>
+		</TR>
+	</TBODY>
+</TABLE>
+    <h3>&nbsp;</h3>
+
+<table>
+  <tr> 
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr valign="top"> 
+    <td colspan="4"><img src="/arabidopsis/qpcr/imgs/footer.jpg" width="760" height="15" alt="footer"></td>
+  </tr>
+  <tr> 
+    <td>&nbsp;</td>
+    <td colspan="2" class="c" valign="top"><table border="0" align="right" cellpadding="0" cellspacing="0">
+        <tr valign="top"> 
+          <td > <div align="right"><font size="-2">Last updated by Jun Zhuang 
+             </font></a> |  <font size="-2">&copy; <script type="text/javascript">var now = new Date(); year = now.getFullYear(); document.write(year);</script> The Institute 
+              for Genomic Research, a division of <a href="http://www.venterinstitute.org" class="c">J. Craig Venter Institute</a></font></div></td>
+
+        </tr>
+      </table></td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr> 
+    <td>&nbsp;</td>
+    <td width="377">&nbsp;</td>
+    <td width="171">&nbsp;</td>
+    <td>&nbsp;</td>
+
+</table>
+
+<!-- ************************************************************************** -->
+</BODY>
+
+</HTML>

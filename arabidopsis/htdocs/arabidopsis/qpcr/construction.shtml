@@ -1,0 +1,20 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html>
+<head>
+<title>The TIGR Arabidopsis thaliana Database</title>
+<LINK REL="stylesheet" HREF="/tdb/e2k1/eukweb.css">
+</HEAD>
+<BODY>
+
+<!--#include virtual="/tdb/e2k1/inc/header.ath1"-->
+<!--#include virtual="/tdb/e2k1/inc/sidebar.ath1"-->
+<!--#include virtual="/tdb/e2k1/inc/start_table.ath1"-->
+
+<body bgcolor="#FFFFFF" text="#000000">
+<P><B>Under Construction</B></P>
+
+<!--#include virtual="/tdb/e2k1/inc/end_table.ath1"-->
+
+</body>
+</html>

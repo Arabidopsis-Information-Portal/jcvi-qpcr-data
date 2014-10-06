@@ -1,0 +1,106 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <title>TIGR Arabidopsis thaliana Gene Expression</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <link href="/arabidopsis/qpcr/qpcr.css" rel="stylesheet" type="text/css">
+    <style type="text/css">
+    </style>
+    <script src="/arabidopsis/qpcr/js/ajax.js"></script>
+</head>
+
+<body style="margin-left":50%;">
+<div id="container" style="position:relative; width: 760px; ">
+
+
+	<div id="logo" align="center" style="position:absolute; width: 760px; top: 5px; left: 50px;"><img src="/arabidopsis/qpcr/imgs/title_0.jpg"  width="760" height="182" ></div> 
+
+
+
+
+
+     	<div id="navsite" align="center" style="position:absolute; width: 760px; top: 210px; left: 65px;"> 
+
+  	<ul> 
+    		<li><a href="/arabidopsis/qpcr/index.shtml">Home</a></li> 
+    		<li><a href="/arabidopsis/qpcr/search.php">Gene Expression</a></li> 
+    		<li><a href="/arabidopsis/qpcr/genelist.php">Gene List</a></li> 
+		<li><a href="/arabidopsis/qpcr/protocols.php">Protocols</a></li>
+		<li><a href="/arabidopsis/qpcr/expression.php">Reporter Images</a></li>
+    		<li><a href="/arabidopsis/qpcr/contact.shtml">Contact</a></li>
+    		<li><a href="http://www.tigr.org">TIGR Home</a></li> 
+  	</ul> 
+     	</div> 
+
+    	<div id="main_content"  style="position:absolute; width: 760px; top: 250px; left: 50px;"> 
+
+
+ 	 <h4 align="center" size="12">Completing the Expression Catalog of the Arabidopsis Transcriptome by Quantitative Real Time PCR</h4> 
+
+The aim of this project is to provide the research community with a catalog of expression
+profiles for all of the approximately 4,000 Arabidopsis genes for which such data do not 
+currently exist. The latest Arabidopsis genome annotation contains 29,993 genes of which 3,786 are transposon related genes and pseudogenes of various kinds. Community efforts using the Affymetrix ATH1 expression array have generated over 1400 publicly available datasets. 
+These provide statistically significant expression values over diverse tissues for ~18,600
+genes. Massively parallel signature sequencing has produced reliable expression profiles
+for ~ 20,800 genes. Together these methods provide data for 
+just over 22,000 distinct protein-coding genes. This leaves at least 4,000 genes without expression data. We propose to develop a catalog of quantitative expression profiles under a variety of tissues and conditions for these 4,000+ Arabidopsis genes 
+that either fall below levels detectable by the Affymetrix ATH1 array or are not
+represented on the array using high throughput quantitative real-time PCR, a technique that
+is several orders of magnitude more sensitive than either of the above methods. In 
+parallel with this, we will develop spatial expression profiles for ~ 1,000 Arabidopsis hypothetical genes using sensitive reporter gene constructs.
+
+<br/>
+<br/>
+<table>
+      <tr>
+        <td>This material is based upon work supported by the National Science Foundation under Grant No.0520022. Any opinions, findings, and conclusions or recommendations expressed in this material are those of the author(s) and do not necessarily 
+reflect the views of the National Science Foundation.</td>
+        <td> <a href="http://www.nsf.gov"> <img src="nsf.gif" width="43"
+height="47" align=right></a></td>
+    </table>
+    <h3>&nbsp;</h3>
+
+<table>
+  <tr> 
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr valign="top"> 
+    <td colspan="4"><img src="/arabidopsis/qpcr/imgs/footer.jpg" width="760" height="15" alt="footer"></td>
+  </tr>
+  <tr> 
+    <td>&nbsp;</td>
+    <td colspan="2" class="c" valign="top"><table border="0" align="right" cellpadding="0" cellspacing="0">
+        <tr valign="top"> 
+          <td > <div align="right"><font size="-2">Last updated by Jun Zhuang 
+             </font></a> |  <font size="-2">&copy; <script type="text/javascript">var now = new Date(); year = now.getFullYear(); document.write(year);</script> The Institute 
+              for Genomic Research, a division of <a href="http://www.venterinstitute.org" class="c">J. Craig Venter Institute</a></font></div></td>
+
+        </tr>
+      </table></td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr> 
+    <td>&nbsp;</td>
+    <td width="377">&nbsp;</td>
+    <td width="171">&nbsp;</td>
+    <td>&nbsp;</td>
+
+</table>
+
+</div>
+<!--end content -->
+
+</body>
+</html>
+
+
+
+
+

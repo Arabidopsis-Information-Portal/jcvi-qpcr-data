@@ -1,0 +1,99 @@
+#!/usr/local/bin/perl
+
+
+use CGI::Carp('fatalsToBrowser');
+use CGI qw/:standard/;
+use Mail::Mailer qw(sendmail);
+use HTML::Template;
+
+
+my $cgi = new CGI;
+
+
+my $email = param("email");
+my $name = param("name");
+my $comments = param("comments");
+my $to = "arablab\@tigr.org";
+my $subject = "Expression Profiling website comment from $name";
+my $timestamp = localtime(time);
+
+
+chomp $email;
+chomp $name;
+chomp $comments;
+
+
+
+
+# check incoming form data for validity
+if (! isValidForm($email) || ! isValidForm($name) || !isValidText($comments)) {
+
+    my $tmpl = HTML::Template->new(filename => "comments_err.tmpl");
+    print $cgi->header;
+    print $tmpl->output;
+}
+
+# success
+else {
+
+    my $mailer = new Mail::Mailer;
+
+    my $subject = "Expression Profiling website comment from $name";
+    my $timestamp = localtime(time);
+
+    $mailer->open({
+	To => $to,
+	From => $email,
+	Subject => $subject
+    });
+
+    print $mailer "On $timestamp -- $name ($email) from the Expression Profiling project website wrote:\n\n";
+    print $mailer "$comments";
+    close $mailer;
+
+    my $tmpl = HTML::Template->new(filename => "comments_ok.tmpl");
+    print $cgi->header;
+    print $tmpl->output;
+}
+
+sub isValidForm {
+
+    my $MAX_LEN = 100;    
+    my ($val) = @_; 
+        
+    # form data must be proper length
+    if (length($val) == 0 || length($val > $MAX_LEN)) {
+    
+        return 0;
+    }
+    
+    # form data must not have invalid chars
+    elsif ($val =~ m/[\!\#\`\~\%\^\&\|\\\/\<\>\+\=\"\:\;\{\}\[\]\?\t\n]/) {
+    
+        return 0;
+    }
+   
+    return 1;
+}
+
+sub isValidText {
+
+    my $MAX_LEN = 500;    
+    my ($val) = @_; 
+        
+    # form data must be proper length
+    if (length($val) == 0 || length($val > $MAX_LEN)) {
+    
+        return 0;
+    }
+    
+    elsif ($val =~ /<a|<a/) {
+        
+        return 0;
+    }
+    
+    return 1;
+}
+
+
+
