@@ -10,34 +10,30 @@
     </style>
 </head>
 
-<body style="margin-left":50%;">
-<div id="container" style="position:relative; width: 760px; ">
+<body style="margin-left":50%;>
+<div id="container" style="position:relative; width: 760px;">
 
+<form action="/cgi-bin/arabidopsis/qpcr/ExpressionPerGenePerTissue" method="GET" onsubmit="return checkSearch(this);"> 
 
-
- <form action="/cgi-bin/arabidopsis/qpcr/ExpressionPerGenePerTissue" method="POST" onsubmit="return checkSearch(this);"> 
-
-<b>Gene Accession Number (enter one or many)</b>
-<br>such as AT1G33930.1 ; AT1G01460.1 (accessions must be seperated by ";" or ",")"
+<b>Gene Accession Number (enter one)</b>
+<br>such as AT1G33930.1 or AT1G01460.1 
 
 <p>
-<textarea cols="30" rows="4" name="gene" multiline="true" value="Please type the gene access number(s) you want to search" id="gene" ></textarea>
+<textarea cols="30" rows="1" name="gene">AT1G33930.1</textarea>
 
 <p>
-<b>Tissue or Treatment type (select none, one, or many)</b>
+<b>Tissue or Treatment type (select none or one)</b>
 <br>
 
-<select name="tissue" multiple>
-
-  <option value="Flower ">Flower Buds</option>
+<select name="tissue" size=8>
+  <option value="Flower">Flower Buds</option>
   <option value="IAA">IAA</option>
   <option value="Leaf">Leaf</option>
   <option value="Root">Root</option>
-  <option value="Salicylic ">Salicylic Acid</option>
+  <option value="Salicylic">Salicylic Acid</option>
   <option value="NaCl">NaCl</option>
-  <option value="Young ">Young Siliques</option>
-  <option value="T87 ">T87 Cell Culture</option>
-
+  <option value="Young">Young Siliques</option>
+  <option value="T87">T87 Cell Culture</option>
 </select>
 
 <p>
