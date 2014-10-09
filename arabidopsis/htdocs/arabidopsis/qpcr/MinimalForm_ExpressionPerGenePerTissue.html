@@ -1,0 +1,108 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <title>TIGR Arabidopsis thaliana Gene Expression</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <link href="/arabidopsis/qpcr/qpcr.css" rel="stylesheet" type="text/css">
+    <style type="text/css">
+    <script src="/arabidopsis/qpcr/js/menu.js"></script>
+    </style>
+</head>
+
+<body style="margin-left":50%;">
+<div id="container" style="position:relative; width: 760px; ">
+
+
+
+ <form action="/cgi-bin/arabidopsis/qpcr/ExpressionPerGenePerTissue" method="POST" onsubmit="return checkSearch(this);"> 
+
+<b>Gene Accession Number (enter one or many)</b>
+<br>such as AT1G33930.1 ; AT1G01460.1 (accessions must be seperated by ";" or ",")"
+
+<p>
+<textarea cols="30" rows="4" name="gene" multiline="true" value="Please type the gene access number(s) you want to search" id="gene" ></textarea>
+
+<p>
+<b>Tissue or Treatment type (select none, one, or many)</b>
+<br>
+
+<select name="tissue" multiple>
+
+  <option value="Flower ">Flower Buds</option>
+  <option value="IAA">IAA</option>
+  <option value="Leaf">Leaf</option>
+  <option value="Root">Root</option>
+  <option value="Salicylic ">Salicylic Acid</option>
+  <option value="NaCl">NaCl</option>
+  <option value="Young ">Young Siliques</option>
+  <option value="T87 ">T87 Cell Culture</option>
+
+</select>
+
+<p>
+<b>Results Format (select one)</b> 
+<br>
+<input checked type='radio' name='format' value='html'>HTML</input>  
+<input type='radio' name='format' value='text'>text</input>
+
+<p>
+<b>Action (click one)</b>   
+<br>
+
+<input type="submit" name="Submit" value="Search"> 
+<input type="reset" name="Submit2" value="Clear">
+
+  </form> 
+
+
+
+
+    <h3>&nbsp;</h3>
+
+
+
+</div>
+</body>
+
+</html>
+
+<script language="JavaScript" type="text/javascript">
+<!--
+function checkSearch(form) {
+
+    var ta = document.getElementById('gene');
+
+    if (form.gene.value == "") {
+
+        alert("Please enter a gene accession number!");
+        return false;
+    }
+
+    else if (form.gene.value.length <= 6) {
+
+        alert("Invalid gene accession number, please re-enter the gene accession number!");
+        return false;
+    }
+
+    return true;
+}
+
+
+//-->
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
