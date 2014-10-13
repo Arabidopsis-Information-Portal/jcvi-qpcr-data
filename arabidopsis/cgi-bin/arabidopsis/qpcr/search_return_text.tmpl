@@ -1,0 +1,26 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<body>
+   "Gene Name", 
+   "Tissue", 
+   "Cycle Time", 
+   "Standard Deviation", 
+   "Ratio to invariants", 
+   "Standard Deviation", 
+   "Absolute Concentration", 
+   "Standard Deviation"
+<br>
+	<TMPL_LOOP NAME="singlesearch_table">
+   <TMPL_VAR NAME="elem_target_id">,
+   <TMPL_VAR NAME="elem_tissue">,
+   <TMPL_VAR NAME="elem_cycle_time">,
+   <TMPL_VAR NAME="elem_cycle_time2">,
+   <TMPL_VAR NAME="elem_ratio">,
+   <TMPL_VAR NAME="elem_ratio2">,
+   <TMPL_VAR NAME="elem_conc">,
+   <TMPL_VAR NAME="elem_conc2">
+<br>
+	</TMPL_LOOP>
+</body>
+</html>

@@ -4,6 +4,7 @@ use CGI qw(:standard);
 use CGI::Carp qw( fatalsToBrowser );
 use DBI;
 use HTML::Template;
+use JSON::XS;
 
 my $underscore_plus=241;
 
@@ -109,15 +110,19 @@ foreach $row(@search_results)
 }
 
 
-if ($format eq "text") {
-    $tmpl = HTML::Template->new(filename => "search_returntext.tmpl");
+if ($format eq "json") {
+    my ($json_object) = encode_json({expression => \@result_presentation}); 
+    print header('application/json');
+    print "$json_object\n";
+} elsif ($format eq "text") {
+    $tmpl = HTML::Template->new(filename => "search_return_text.tmpl");
     if($#result_presentation >=0){
 	$tmpl->param(singlesearch_table=>\@result_presentation);
     }
     print header;
     print $tmpl->output;
-} else {
-    $tmpl = HTML::Template->new(filename => "simple_search_return.tmpl");
+} else {  # format eq HTML
+    $tmpl = HTML::Template->new(filename => "search_return_html.tmpl");
     if($#result_presentation >=0){
 	$tmpl->param(singlesearch_table=>\@result_presentation);
     } 
