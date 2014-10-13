@@ -2,26 +2,25 @@
 "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <body>
-
-	
-	<br>
-	<br>
-
-<p>
-  	 Gene Name, &nbsp Tissue, &nbsp Cycle Time, &nbsp Ratio to invariants, &nbsp Absolute Concentration (fmol/mg)
-
-
-</p>
+   "Gene Name", 
+   "Tissue", 
+   "Cycle Time", 
+   "Standard Deviation", 
+   "Ratio to invariants", 
+   "Standard Deviation", 
+   "Absolute Concentration", 
+   "Standard Deviation"
+<br>
 	<TMPL_LOOP NAME="singlesearch_table">
-<p>
-   <TMPL_VAR NAME="elem_target_id">, &nbsp <TMPL_VAR NAME="elem_tissue">, &nbsp <TMPL_VAR NAME="elem_cycle_time">, &nbsp  <TMPL_VAR NAME="elem_ratio">, &nbsp <TMPL_VAR NAME="elem_conc">
-</p>
+   <TMPL_VAR NAME="elem_target_id">,
+   <TMPL_VAR NAME="elem_tissue">,
+   <TMPL_VAR NAME="elem_cycle_time">,
+   <TMPL_VAR NAME="elem_cycle_time2">,
+   <TMPL_VAR NAME="elem_ratio">,
+   <TMPL_VAR NAME="elem_ratio2">,
+   <TMPL_VAR NAME="elem_conc">,
+   <TMPL_VAR NAME="elem_conc2">
+<br>
 	</TMPL_LOOP>
-
-	<br>
-
-
-
-
-
+</body>
 </html>

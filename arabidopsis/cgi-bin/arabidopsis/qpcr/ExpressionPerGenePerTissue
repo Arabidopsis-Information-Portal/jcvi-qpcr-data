@@ -110,29 +110,18 @@ foreach $row(@search_results)
 
 
 if ($format eq "text") {
-    print header;
-    if (scalar(@result_presentation) == 0) {
-	
-	$tmpl =HTML::Template->new(filename => "search_error.tmpl");
-    }
-    else {
-	$tmpl = HTML::Template->new(filename => "search_returntext.tmpl");
-	$tmpl->param(singlesearch_table=>\@result_presentation);}
-    print $tmpl->output;
-}
-else{
+    $tmpl = HTML::Template->new(filename => "search_returntext.tmpl");
     if($#result_presentation >=0){
-	$tmpl = HTML::Template->new(filename => "search_return1.tmpl");
 	$tmpl->param(singlesearch_table=>\@result_presentation);
-	#JZ2	$tmpl->param(list1=>\@list_presentation);
-	#$tmpl->param(list2=>\@list_presentation);
-	#$tmpl->param(list3=>\@list_presentation);
-    }
-    else	{
-	$tmpl = HTML::Template->new(filename => "search_return1.tmpl");
     }
     print header;
     print $tmpl->output;
-    
+} else {
+    $tmpl = HTML::Template->new(filename => "simple_search_return.tmpl");
+    if($#result_presentation >=0){
+	$tmpl->param(singlesearch_table=>\@result_presentation);
+    } 
+    print header;
+    print $tmpl->output;
 }
 
