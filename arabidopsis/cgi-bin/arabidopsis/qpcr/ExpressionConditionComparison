@@ -1,0 +1,122 @@
+#!/usr/local/bin/perl -w
+
+use CGI qw(:standard);
+use CGI::Carp qw( fatalsToBrowser );
+use DBI;
+use HTML::Template;
+use JSON::XS;
+
+my $underscore_plus=241;
+my $UNDETECTABLE_VALUE=45;
+
+###### Connect to database
+
+my $server_name = $ENV{"SERVER_NAME"};
+my $dbh;
+
+#my $INTERNAL_SERVER = ($server_name eq "www-devel.tigr.org") ? 1 : 0;
+my $INTERNAL_SERVER = ($server_name eq "localhost") ? 1 : 0;
+
+# inside
+if ($INTERNAL_SERVER) {
+   $dbh = DBI->connect("dbi:mysql:town_at_qpcr:mysql","access","access") or die "Cannot connect to database";
+} else {
+    $dbh = DBI->connect("dbi:mysql:town_at_qpcr:mysql51-dmz-pro","access","access") or die "Cannot connect to database";
+}
+
+my $tissue1 = uc param("tissue1");
+my $tissue2 = uc param("tissue2");
+my $fold_change=param("change");
+
+$LIMIT=1000;
+
+my $bigger = $tissue1;
+my $smaller = $tissue2;
+
+#######################################
+### search for genes, query database
+
+my $query;
+
+$query=qq{SELECT * FROM results WHERE tissue_treatment_group_id LIKE '$bigger%' AND target_id NOT IN ('lysA','pheB','thrC','trpF','dapB') ORDER BY avg_conc DESC};
+
+my $sth=$dbh->prepare($query);
+$sth->execute();
+my @big_results;
+
+$counter=0;
+while ((my @result = $sth->fetchrow_array()) && ($counter<$LIMIT)) {
+    my $candidate_gene=$result[0];
+    my $bigger_value=$result[6];
+    my $bigger_value_stddev=$result[7];
+
+    if(!$bigger_value){last;}
+    my $new_query=qq{SELECT avg_cycle_time,avg_conc, stddev_conc FROM results WHERE tissue_treatment_group_id LIKE '$smaller%' AND target_id='$candidate_gene'};
+
+    my $sth=$dbh->prepare($new_query);
+    $sth->execute();
+    my ($small_cycle,$small_value, $small_stddev)=$sth->fetchrow_array();
+
+    if(!$small_value) {
+        if($small_cycle == $UNDETECTABLE_VALUE) {
+            push(@big_results, join("\t",($candidate_gene,$bigger_value,$bigger_value_stddev,"","")));
+            $counter++;
+        }
+        next;
+    }  #if the value in smaller is 0 but not NULL, it's a good candidate.
+
+
+    if($bigger_value > ($fold_change*$small_value)) {
+        push(@big_results, join("\t",($candidate_gene,$bigger_value,$bigger_value_stddev,$small_value, $small_stddev)));
+        $counter++;
+    }
+}  # end while
+
+### Get the full name of treatment.
+$query_1 =qq{SELECT DISTINCT (treatment_name)FROM treatment WHERE treatment_name LIKE '$bigger%';};
+my $sth_1=$dbh->prepare($query_1);
+$sth_1->execute();
+my ($bigger_name)=$sth_1->fetchrow_array();
+
+$query_2 =qq{SELECT DISTINCT (treatment_name)FROM treatment WHERE treatment_name LIKE '$smaller%';};
+my $sth_2=$dbh->prepare($query_2);
+$sth_2->execute();
+my ($smaller_name)=$sth_2->fetchrow_array();
+
+# render sorted taxon stats table into format for template
+foreach $row(@big_results) {
+    my @field=split(/\t/,$row);
+    for(my $i=1;$i<5;$i+=2) {
+        if($field[$i]=~m#0\.0*\d\d\d*# ){
+            $field[$i]=~s/(0\.0*\d\d)\d*/$1/;
+        } else {
+            $field[$i]=~s/([1-9]+\.\d\d)\d*/$1/;
+        }
+        if($field[$i+1]=~m#0\.0*\d\d\d*# ) {
+            $field[$i+1]=~s/(0\.0*\d\d)\d*/$1/;
+        } else {
+            $field[$i+1]=~s/([1-9]+\.\d\d)\d*/$1/;
+        }
+        $field[$i+1]=$field[$i+1];
+    }
+
+    if(!($field[3])) {
+        $field[3]="Undetectable"; $field[4]="";
+    }
+
+    my %row_hash = (
+      elem_target_id => $field[0],
+      elem_tissue1 => $bigger_name,
+      elem_tissue1_value=> $field[1],
+      elem_tissue1_value2=> $field[2],
+      elem_tissue2 => $smaller_name,
+      elem_tissue2_value=> $field[3],
+      elem_tissue2_value2=> $field[4]
+    );
+
+    push(@result_presentation, \%row_hash);
+}
+
+my ($json_object) = encode_json({compare_table => \@result_presentation});
+print header('application/json');
+print $json_object;
