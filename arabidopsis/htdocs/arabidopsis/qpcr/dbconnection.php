@@ -7,7 +7,7 @@
 //else { $hostName="mysql-dmz"; } 
 
 # External, public database server
-$hostName="mysql51-dmz-pro";
+$hostName="mysql-dmz-pro";
 
 # Internal, development database server
 #$hostName="mysql";

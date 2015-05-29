@@ -30,7 +30,7 @@ if ($INTERNAL_SERVER) {
 
 else {
 
-    $dbh = DBI->connect("dbi:mysql:town_at_qpcr:mysql51-dmz-pro","access","access") or die "Cannot connect to database";
+    $dbh = DBI->connect("dbi:mysql:town_at_qpcr:mysql-dmz-pro","access","access") or die "Cannot connect to database";
 }
 
 
