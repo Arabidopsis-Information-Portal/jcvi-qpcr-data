@@ -1,7 +1,7 @@
 <?php
     include_once ("dbconnection.php");
 
-    $search_image_id = filter_input(INPUT_GET, 'image', FILTER_SANITIZE_STRING);
+    $search_image_id = filter_input(INPUT_GET, 'image_id', FILTER_SANITIZE_STRING);
 
     $query = "SELECT pa.po_code, pa.expression, pc.name
               FROM po_assignment pa
