@@ -6,7 +6,8 @@
         $protocol = strleft(strtolower($_SERVER["SERVER_PROTOCOL"]), "/").$s;
         $port = ($_SERVER["SERVER_PORT"] == "80") ? "" : (":" .$_SERVER["SERVER_PORT"]);
         $app_base = dirname($_SERVER["PHP_SELF"]);
-        return $protocol."://".$_SERVER["SERVER_NAME"].$port.$app_base;
+        //return $protocol."://".$_SERVER["SERVER_NAME"].$port.$app_base;
+        return $protocol."://www.jcvi.org".$port.$app_base;
     }
 
     function strleft($s1, $s2) {
